@@ -1,12 +1,12 @@
-
+DROP TABLE IF EXISTS  signatures;
 
 CREATE TABLE signatures (
     id SERIAL primary key,
     first VARCHAR,
-    lastr VARCHAR,
+    last VARCHAR,
     signature TEXT,
-    created_at INT
-)
+    created_at TIMESTAMP
+);
 
 
 -- INSERT INTO cities (city, country, population) VALUES ('Berlin', 'Germany', 3610156);

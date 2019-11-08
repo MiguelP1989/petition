@@ -1,5 +1,6 @@
 (function() {
     let theBox = document.querySelector("#canvas");
+    let hiddensigned = document.querySelector("#signed");
     let mouseX = 0;
     let mouseY = 0;
     let drawing = false;
@@ -30,6 +31,8 @@
                 }
                 let dataURL = theBox.toDataURL();
                 console.log(dataURL);
+                hiddensigned.value = dataURL;
+                console.log(hiddensigned);
             });
         });
     });
