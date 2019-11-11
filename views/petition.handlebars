@@ -1,16 +1,24 @@
 
 
 <form action="/petition" method="POST">
-<input type="text" name="first" >
-<input type="text" name="last" >
+    <h1>Sing petition</h1>
+<div class ="firstandlast">
+<!-- <input type="text" name="first" placeholder="First name">
+<input type="text" name="last" placeholder="Last name"> -->
+</div>
+
 <input  id="signed" type="hidden" name="signature">
 <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+<div class="box">
 <canvas id="canvas" width="300" height="100"></canvas>
+</div>
 
+<div class ="button">
     <button type="submit">Submit
     </button>
-
+</div>
 </form>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

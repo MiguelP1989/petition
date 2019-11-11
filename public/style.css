@@ -1,7 +1,66 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.firstandlast {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    width: 260px;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
 #canvas {
     border: 2px solid black;
 }
+.box {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
 
-.sign {
-    display: none;
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.hiddenmessage {
+    display: flex;
+    justify-content: center;
+}
+
+/* /////////    SIGNED PAGE  /////// */
+
+.signed {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.thankyou {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+}
+img {
+    height: 100px;
+    width: 250px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border: 2px solid black;
+}
+.signers {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
