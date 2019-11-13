@@ -1,5 +1,5 @@
 var spicedPg = require("spiced-pg");
-var db = spicedPg("postgres:postgres:postgres@localhost:5432/petition");
+var db = spicedPg(process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/petition");
 
 module.exports.addSignature = function addSignature(signature, userId) {
     return db.query(
@@ -77,6 +77,14 @@ module.exports.addUserInfo = function addUserInfo(age, city, url, userId) {
         [age ? Number(age) : null || null, city, url, userId]
     );
 };
+
+
+
+////////// PROFILE EDIT //////////
+
+
+module.export.
+
 
 // db.getSigners(userId)
 //                     .then(sign => {

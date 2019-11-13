@@ -257,7 +257,13 @@ app.post("/profile", (req, res) => {
         });
 });
 
-//////////
+///////////////////    PROFILE EDIT      /////////////
+
+app.get("/profile/edit", (req, res) => {
+    res.render("edit", {
+        layout: "main"
+    });
+});
 
 // db.getUserInfo().then()
 // console.log("req.body of login: ", req.body);
@@ -292,7 +298,10 @@ app.post("/profile", (req, res) => {
 //         });
 // });
 
-app.listen(8080, () => console.log("listening"));
+app.listen(process.env.PORT || 8080, () => console.log("listening"));
+
+// git remote add heroku + url
+// git remote -v
 
 // req.body.url = "mywebsite.com";
 // str.startsWith("http://");
