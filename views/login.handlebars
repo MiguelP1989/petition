@@ -5,12 +5,18 @@
 <h3>Please log in</h3>
 
 <form action="/login" method="POST">
-
 <input type="text" name="email" placeholder="email">
 <input type="password" name="password" placeholder="Password..">
 
+{{#if error}}
+{{error}}
+{{/if}}
 <div class ="button">
     <button type="submit">Log in
     </button>
 </div>
+
+<div>
+    <button><a href="/register">Register</a>
+    </button>
 </form>

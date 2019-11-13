@@ -11,7 +11,11 @@ app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
 app.use(express.static("./public"));
 // app.use(cookieSession());
-app.use(express.urlencoded({ extended: false }));
+app.use(
+    express.urlencoded({
+        extended: false
+    })
+);
 
 app.use(
     cookieSession({
@@ -19,13 +23,12 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 14
     })
 );
+// app.use(csurf());
 
 // app.use(function(req, res, next) {
 //     res.setHeader("x-frame-options", "DENY");
 // res.locals.csrfToken = req.csrToken
 // });
-
-// app.use(csurf());
 
 // app.get("/", (req, res) => {
 //     console.log("********* / *****");
@@ -75,6 +78,8 @@ app.get("/signed", (req, res) => {
         results => {
             let image = results[0];
             let data = results[1];
+            console.log("image ", image);
+            console.log("dataaaaaa ", data);
 
             res.render("signed", {
                 layout: "main",
@@ -103,6 +108,23 @@ app.get("/signers", (req, res) => {
         });
 });
 
+app.get("/signers/:city", (req, res) => {
+    console.log("req.params.city......    ", req.params);
+    db.getCity(req.params.city)
+        .then(results => {
+            console.log(results);
+
+            let listofsigners = results.rows;
+
+            res.render("signers", {
+                layout: "main",
+                listofsigners
+            });
+        })
+        .catch(err => {
+            console.log("err: ", err);
+        });
+});
 ////////// Registration //////////////
 
 app.get("/logout", (req, res) => {
@@ -132,16 +154,15 @@ app.post("/register", (req, res) => {
                     id: userId,
                     first: first,
                     last: last,
-                    email: email,
-                    password: hashedPassword
+                    email: email
                 };
-                res.redirect("/petition");
+                res.redirect("/profile");
             })
             .catch(err => {
                 console.log("error in register: ", err);
                 res.render("register", {
                     layout: "main",
-                    error: "This email is already registered !!"
+                    error: "This email is already registered. Please try again!"
                 });
             });
     });
@@ -160,37 +181,88 @@ app.post("/login", (req, res) => {
     let email = req.body.email;
     let pass = req.body.password;
 
-    db.getUserInfo(email).then(results => {
-        let hashPass = results.rows[0].password;
-        let userId = results.rows[0].id;
-        console.log("results : ", results);
-        console.log("hashPass: ", hashPass);
-        // console.log("userId: ", userId);
+    db.getUserInfo(email)
+        .then(results => {
+            let hashPass = results.rows[0].password;
+            let userId = results.rows[0].id;
+            let signatureId = results.rows[0].signatureId;
+            console.log("results : ", results);
+            console.log("hashPass: ", hashPass);
+            // console.log("userId: ", userId);
+            compare(pass, hashPass)
+                .then(match => {
+                    console.log("maaaatch ", match);
 
-        compare(pass, hashPass).then(match => {
-            console.log("match ", match);
+                    if (match) {
+                        req.session.user = {};
+                        req.session.user.id = userId;
+                        req.session.user.signatureId = signatureId;
 
-            if (match === true) {
-                req.session.user = {
-                    id: userId
-                };
-
-                db.getSigners(userId)
-                    .then(sign => {
-                        console.log("sign : ", sign);
-                        if (sign.rows.length === 1) {
+                        if (signatureId != null) {
                             res.redirect("/signed");
                         } else {
                             res.redirect("/petition");
                         }
-                    })
-                    .catch(err => {
-                        console.log("error: ", err);
-                    });
-            }
+                    } else {
+                        res.render("login", {
+                            layout: "main",
+                            error: "Wrong password! Please try again!"
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log("err ", err);
+                    // res.render("login", {
+                    //     layout: "main",
+                    //     error: "Wrong password! Please try again!"
+                    // });
+                });
+        })
+        .catch(err => {
+            console.log("err: ", err);
+            res.render("login", {
+                layout: "main"
+            });
         });
+});
+
+// //////// PROFILE//////
+
+app.get("/profile", (req, res) => {
+    res.render("profile", {
+        layout: "main"
     });
 });
+
+app.post("/profile", (req, res) => {
+    console.log(req.body);
+    let age = req.body.age;
+    let city = req.body.city;
+    let url = req.body.url;
+    let userId = req.session.user.id;
+
+    console.log("req.session: ", req.session);
+
+    if (!url.startsWith("http://")) {
+        url = "http://" + url;
+    }
+
+    db.addUserInfo(age, city, url, userId)
+        .then(results => {
+            console.log("results  :", results);
+            res.redirect("/petition");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+//////////
+
+// db.getUserInfo().then()
+// console.log("req.body of login: ", req.body);
+// let email = req.body.email;
+// let pass = req.body.password;
 
 // db.getImage(req.session.id).then(image => {
 //     // console.log("image: ", image);
@@ -222,11 +294,7 @@ app.post("/login", (req, res) => {
 
 app.listen(8080, () => console.log("listening"));
 
-// const db = require("./utils/db");
+// req.body.url = "mywebsite.com";
+// str.startsWith("http://");
 //
-// });
-//
-
-// app.get("/test", (req, res) => {
-//     res.send("<h1>petition...!!!</h1>");
-// });
+// ("http:// + +");
