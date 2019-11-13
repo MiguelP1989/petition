@@ -83,6 +83,59 @@ module.exports.addUserInfo = function addUserInfo(age, city, url, userId) {
 
 ////////// PROFILE EDIT //////////
 
+module.exports.getProfile = function getProfile(userId) {
+    return db.query(
+        `SELECT first, last, city, age, url, email
+        FROM users
+        JOIN user_profiles
+        ON users.id = user_profiles.user_id WHERE users.id=$1`,
+        [userId]
+    );
+};
+
+module.exports.editProfileUsers = function editProfileUsers(
+    first,
+    last,
+    email,
+    userId
+) {
+    return db.query(
+        `UPDATE users
+        SET first = $1, last = $2, email = $3
+        WHERE id = $4`,
+        [first, last, email, userId]
+    );
+};
+
+// module.exports.editProfileUsersId = function editProfileUsersId(
+//     age,
+//     city,
+//     url,
+//     userId
+// ) {
+//     return db.query(
+//         `UPDATE user_profiles
+// SET age = $1, city = $2, url = $3
+// WHERE id = $4`,
+//         [age, city, url, userId]
+//     );
+// };
+
+module.exports.updateProfileUsers = function updateProfileUsers(
+    age,
+    city,
+    url,
+    userId
+) {
+    return db.query(
+        `INSERT INTO user_profiles (age, city, url, user_id)
+    VALUES ($1, £2, £3, $4)
+    ON CONFLICT (user_id)
+    DO UPDATE SET age = $1, city = $2, url = $3`,
+        [age, city, url, userId]
+    );
+};
+
 // db.getSigners(userId)
 //                     .then(sign => {
 //                         console.log("sign : ", sign);

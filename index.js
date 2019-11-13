@@ -260,9 +260,65 @@ app.post("/profile", (req, res) => {
 ///////////////////    PROFILE EDIT      /////////////
 
 app.get("/profile/edit", (req, res) => {
-    res.render("edit", {
-        layout: "main"
+    // console.log("req.session: ", req.session);
+    let userId = req.session.user.id;
+    db.getProfile(userId).then(results => {
+        // console.log("results..: ", results);
+        let first = results.rows[0].first;
+        let last = results.rows[0].last;
+        let city = results.rows[0].city;
+        let age = results.rows[0].age;
+        let url = results.rows[0].url;
+        let email = results.rows[0].email;
+
+        res.render("edit", {
+            layout: "main",
+            first: first,
+            last: last,
+            city: city,
+            age: age,
+            url: url,
+            email: email
+        });
     });
+});
+
+app.post("/profile/edit", (req, res) => {
+    console.log("update req.body: ", req.body);
+    let first = req.body.first;
+    let last = req.body.last;
+    let email = req.body.email;
+    let userId = req.session.user.id;
+    let age = req.body.age;
+    let city = req.body.city;
+    let url = req.body.url;
+    // console.log("userId :", userId);
+
+    Promise.all([
+        db.editProfileUsers(first, last, email, userId),
+        db.updateProfileUsers(age, city, url, userId)
+    ])
+        .then(results => {
+            console.log("resuuults :", results);
+
+            console.log("ressuuuuuuuuuuuuuusst ", results[0].rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+    //     db.editProfileUsers(first, last, email, userId)
+    //         .then(results => {
+    //             res.redirect("/petition");
+    //             console.log(" update results: ", results);
+    //         })
+    //         .catch(err => {
+    //             console.log("err: ", err);
+    //         });
+    //
+    //     db.editProfileUsersId(age, city, url, userId).then(data => {
+    //         console.log("data.......: ", data);
+    //     });
 });
 
 // db.getUserInfo().then()
