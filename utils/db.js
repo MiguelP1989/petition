@@ -93,12 +93,7 @@ module.exports.getProfile = function getProfile(userId) {
     );
 };
 
-module.exports.editProfileUsers = function editProfileUsers(
-    first,
-    last,
-    email,
-    userId
-) {
+module.exports.updateUsers = function updatUsers(first, last, email, userId) {
     return db.query(
         `UPDATE users
         SET first = $1, last = $2, email = $3
@@ -106,20 +101,6 @@ module.exports.editProfileUsers = function editProfileUsers(
         [first, last, email, userId]
     );
 };
-
-// module.exports.editProfileUsersId = function editProfileUsersId(
-//     age,
-//     city,
-//     url,
-//     userId
-// ) {
-//     return db.query(
-//         `UPDATE user_profiles
-// SET age = $1, city = $2, url = $3
-// WHERE id = $4`,
-//         [age, city, url, userId]
-//     );
-// };
 
 module.exports.updateProfileUsers = function updateProfileUsers(
     age,
@@ -129,31 +110,24 @@ module.exports.updateProfileUsers = function updateProfileUsers(
 ) {
     return db.query(
         `INSERT INTO user_profiles (age, city, url, user_id)
-    VALUES ($1, £2, £3, $4)
+    VALUES ($1, $2, $3, $4)
     ON CONFLICT (user_id)
     DO UPDATE SET age = $1, city = $2, url = $3`,
         [age, city, url, userId]
     );
 };
 
-// db.getSigners(userId)
-//                     .then(sign => {
-//                         console.log("sign : ", sign);
-//                         if (sign.rows.length === 1) {
-//                             res.redirect("/signed");
-//                         } else {
-//                             res.redirect("/petition");
-//                         }
-//                     })
-//                     .catch(err => {
-//                         console.log("error: ", err);
-//                     });
-//             }
-//             if (match === false) {
-//                 res.redirect("/petition");
-//             }
-//         })
-//         .catch(() => res.redirect("/petition"));
-// })
-// .catch(() => res.redirect("/register"));
-// });
+module.exports.updatePassword = function updatUsers(
+    first,
+    last,
+    email,
+    password,
+    userId
+) {
+    return db.query(
+        `UPDATE users
+        SET first = $1, last = $2, email = $3, password = $4
+        WHERE id = $5`,
+        [first, last, email, password, userId]
+    );
+};

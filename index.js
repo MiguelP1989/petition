@@ -254,6 +254,10 @@ app.post("/profile", (req, res) => {
         })
         .catch(err => {
             console.log(err);
+            res.render("profile", {
+                layout: "main",
+                ageError: "Ups, something went wrong..Please insert your age!"
+            });
         });
 });
 
@@ -292,34 +296,99 @@ app.post("/profile/edit", (req, res) => {
     let age = req.body.age;
     let city = req.body.city;
     let url = req.body.url;
-    // console.log("userId :", userId);
+    let password = req.body.password;
+
+    if (!url.startsWith("http://")) {
+        url = "http://" + url;
+    }
+    // console.log("userId :", userId)
 
     Promise.all([
-        db.editProfileUsers(first, last, email, userId),
+        db.updateUsers(first, last, email, userId),
         db.updateProfileUsers(age, city, url, userId)
     ])
         .then(results => {
             console.log("resuuults :", results);
+            let updateUsers = results[0].rows;
+            let updateUserProfile = results[1].rows;
 
-            console.log("ressuuuuuuuuuuuuuusst ", results[0].rows);
+            let infoUpdate = [...updateUsers, ...updateUserProfile];
+            console.log("infoUpdate :", infoUpdate);
         })
         .catch(err => {
             console.log(err);
         });
-
-    //     db.editProfileUsers(first, last, email, userId)
-    //         .then(results => {
-    //             res.redirect("/petition");
-    //             console.log(" update results: ", results);
-    //         })
-    //         .catch(err => {
-    //             console.log("err: ", err);
-    //         });
-    //
-    //     db.editProfileUsersId(age, city, url, userId).then(data => {
-    //         console.log("data.......: ", data);
-    //     });
+    if (password != null) {
+        hash(password)
+            .then(hashedPassword => {
+                db.updatePassword(
+                    first,
+                    last,
+                    email,
+                    hashedPassword,
+                    userId
+                ).then(results => {
+                    console.log("updated password: ", results);
+                });
+            })
+            .catch(err => {
+                console.log("err: ", err);
+            });
+        db.updateProfileUsers(age, city, url, userId)
+            .then(results => {
+                console.log("results :", results);
+            })
+            .catch(err => {
+                console.log("err :", err);
+            });
+    } else {
+        Promise.all([
+            db.updateUsers(first, last, email, userId),
+            db.updateProfileUsers(age, city, url, userId)
+        ])
+            .then(results => {
+                let updateUsers = results[0].rows;
+                let updateProfileUsers = results[0].rows;
+                let infoUpdate = [...updateUsers, ...updateProfileUsers];
+                console.log("infoUpdate :", infoUpdate);
+            })
+            .catch(err => {
+                console.log("err :", err);
+            });
+    }
 });
+/////////// DELETE SIGNATURE ///////
+
+// db.updateUsers(first, last, email, userId)
+//     .then(results => {
+//         console.log(
+//             "update on users if the user did not enter a new password : ",
+//             results
+//         );
+//     })
+//     .catch(err => {
+//         console.log("error ", err);
+//     });
+// db.updateProfileUsers(age, city, url, userId)
+//     .then(results => {
+//         console.log("results :", results);
+//     })
+//     .catch(err => {
+//         console.log("err :", err);
+//     });
+
+//     db.editProfileUsers(first, last, email, userId)
+//         .then(results => {
+//             res.redirect("/petition");
+//             console.log(" update results: ", results);
+//         })
+//         .catch(err => {
+//             console.log("err: ", err);
+//         });
+//
+//     db.editProfileUsersId(age, city, url, userId).then(data => {
+//         console.log("data.......: ", data);
+//     });
 
 // db.getUserInfo().then()
 // console.log("req.body of login: ", req.body);
