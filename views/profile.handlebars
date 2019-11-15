@@ -5,10 +5,10 @@
 {{#if ageError}}
 <p>{{ageError}}</p>
 {{/if}}
-<input type="text" name="age" placeholder="Age">
+<input type="number" name="age" placeholder="Age">
 <input type="text" name="city" placeholder="City">
 <input type="text" name="url" placeholder="homepage">
-
+<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 <div class ="button">
     <button type="submit">Continue

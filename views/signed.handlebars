@@ -11,12 +11,17 @@
 <a href="/signers">See all {{count}} signers</a>
 </div>
 <div>
+
     <a href="/profile/edit">Edit your profile</a>
 
 </div>
 
-<form action="/signers/delete" method="POST">
+<form action="/signed/delete" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <button>
-        <a href="/petition">Delete your signature</a>
+        Delete your signature
     </button>
 </form>
+<button>
+    <a href="/Logout">Logout</a>
+</button>

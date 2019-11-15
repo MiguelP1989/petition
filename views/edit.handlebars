@@ -1,17 +1,19 @@
 <form action="/profile/edit" method="POST">
     <h1>Profile Edit</h1>
-
-<input  type="text" name="first" value="{{first}}" placeholder="First name..">
-<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
-<input  type="text" name="last" value="{{last}}" placeholder="Last name..">
+<label>Name</label>
+<input  type="text" name="first" value="{{first}}" placeholder="Name">
+<input  type="text" name="last" value="{{last}}" placeholder="Last Name">
+{{#if ageError}}
+{{ageError}}
+{{/if}}
 <input  type="text" name="age" value="{{age}}" placeholder="Age">
 <input  type="text" name="city" value="{{city}}" placeholder="City">
 <input type="text" name="email" value="{{email}}" placeholder="Email">
 <input type="password" name="password" placeholder="Password..">
-<input type="text" name="url" placeholder="Homepage">
-
+<input type="text" name="url"  value ="{{url}}" placeholder="Homepage">
+<input type="hidden" name="_csrf" value="{{csrfToken}}">
 <div class ="button">
-    <button><a href="/signed">Update</a>
+    <button type="submit">Update
     </button>
 </div>
 </form>

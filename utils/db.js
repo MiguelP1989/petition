@@ -27,7 +27,8 @@ module.exports.countSignNames = function countSignNames() {
 };
 
 module.exports.getSignNames = function getSignNames() {
-    return db.query(`SELECT first, last, city, age, url FROM signatures
+    return db.query(`SELECT first, last, city, age, url
+        FROM signatures
         JOIN users
         ON user_id = users.id
         LEFT JOIN user_profiles
@@ -63,7 +64,7 @@ module.exports.register = function register(first, last, email, password) {
 module.exports.getUserInfo = function getUserInfo(email) {
     return db.query(
         `SELECT users.password, users.id, signatures.id
-AS signatureId FROM users LEFT JOIN signatures ON signatures.user_id = users.id WHERE email = $1`,
+AS "signid" FROM users LEFT JOIN signatures ON signatures.user_id = users.id WHERE email = $1`,
         [email]
     );
 };
@@ -117,7 +118,7 @@ module.exports.updateProfileUsers = function updateProfileUsers(
     );
 };
 
-module.exports.updatePassword = function updatUsers(
+module.exports.updatePassword = function updatePassword(
     first,
     last,
     email,
@@ -130,4 +131,10 @@ module.exports.updatePassword = function updatUsers(
         WHERE id = $5`,
         [first, last, email, password, userId]
     );
+};
+
+////////// Delete signatures /////
+
+module.exports.deleteSignature = function deleteSignature(sigUserId) {
+    return db.query(`DELETE from signatures WHERE user_id = $1`, [sigUserId]);
 };

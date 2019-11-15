@@ -1,25 +1,66 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    paddding: 0;
+    font-family: gouldy-old style, Georgia, serif;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 90px 1fr 20px;
+    background-size: cover;
+    /* background-position: center; */
+    height: 100%;
+    background-color: black;
+}
+.box {
+    display: flex;
+    justify-content: center;
+    border: 2px solid red;
+    justify-content: space-around;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    border: 2px black solid;
+    width: 400px;
+    height: 700px;
     justify-content: center;
 }
 
-.firstandlast {
-    display: flex;
-    justify-content: center;
-}
-
-input {
-    width: 260px;
+input,
+button {
+    width: 300px;
     height: 30px;
     font-size: 20px;
     margin-left: 20px;
+    margin-bottom: 14px;
+    border: 1px solid black;
+}
+
+.welcome {
+    display: flex;
+    border: 2px solid black;
+    align-items: center;
+}
+
+h1 {
+    margin: 30px;
+    color: white;
+}
+
+.welcome {
+    /* background: url("https://image.freepik.com/free-photo/man-jumping-impossible-possible-cliff-sunset-background-business-concept-idea_1323-265.jpg");
+    background-size: contain; */
 }
 
 #canvas {
     border: 2px solid black;
 }
-.box {
+
+/* .box {
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -34,11 +75,9 @@ input {
 .hiddenmessage {
     display: flex;
     justify-content: center;
-}
-
+} */
 /* /////////    SIGNED PAGE  /////// */
-
-.signed {
+/* .signed {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -63,4 +102,13 @@ img {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+} */
+button {
+    /* adding: 0.5rem 2.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background: #111;
+    border-radius: 2.1875rem; */
 }
