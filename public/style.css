@@ -45,6 +45,10 @@ button {
     border-radius: 10px;
 }
 
+.title {
+    color: orange;
+}
+
 .welcome,
 .firstbox {
     display: flex;

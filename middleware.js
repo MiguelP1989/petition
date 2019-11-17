@@ -8,7 +8,7 @@ exports.requireLoggedInUser = function(req, res, next) {
 
 exports.requireLoggedOutUser = function(req, res, next) {
     if (req.session.user) {
-        res.redirect("/petition");
+        res.redirect("/petion");
     } else {
         next();
     }
