@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    margin: 0;
+    margin: 10px;
     paddding: 0;
     font-family: gouldy-old style, Georgia, serif;
 }
@@ -8,7 +8,7 @@
 body {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: 70px 1fr 60px;
+    grid-template-rows: 60px 1fr 60px;
     background-size: cover;
     /* background-position: center; */
     height: 100%;
@@ -28,8 +28,6 @@ form {
     width: 400px;
     height: 500px;
     justify-content: center;
-    /* opacity: 0.9;
-    background-color: #ffffff; */
 }
 
 input,

@@ -8,10 +8,11 @@
     <div class="petitionform">
         <form action="/petition" method="POST">
             <div class="firstandlast">
+                <h3>Sign up!!</h3>
                 <input id="signed" type="hidden" name="signature">
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
                 <canvas id="canvas" width="300" height="100"></canvas>
-                <button  type="submit">Sign up</button>
+                <button  type="submit">Submit</button>
                 <button><a href="/Logout">Logout</a></button>
         </form>
     </div>
