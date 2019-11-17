@@ -141,7 +141,7 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
-app.get("/", requireLoggedOutUser, (req, res) => {
+app.get("/", (req, res) => {
     res.redirect("/register");
 });
 
@@ -184,13 +184,13 @@ app.post("/register", requireLoggedOutUser, (req, res) => {
 
 //////// LOG IN ///////
 
-app.get("/login", requireLoggedOutUser, (req, res) => {
+app.get("/login", (req, res) => {
     res.render("login", {
         layout: "main"
     });
 });
 
-app.post("/login", requireLoggedOutUser, (req, res) => {
+app.post("/login", (req, res) => {
     console.log("req.body of login: ", req.body);
     let email = req.body.email;
     let pass = req.body.password;
