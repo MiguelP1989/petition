@@ -10,8 +10,8 @@ const csurf = require("csurf");
 const {
     requireLoggedOutUser,
     requireNoSignature,
-    requireSignature
-    // requireLoggedInUser
+    requireSignature,
+    requireLoggedInUser
 } = require("./middleware");
 
 app.engine("handlebars", hb());
@@ -57,7 +57,7 @@ app.get("/petition", requireNoSignature, (req, res) => {
 //
 //
 
-app.post("/petition", requireNoSignature, (req, res) => {
+app.post("/petition", requireLoggedInUser, requireNoSignature, (req, res) => {
     // let first = req.body.first;
     // let last = req.body.last;
     let signature = req.body.signature;
@@ -170,7 +170,8 @@ app.post("/register", requireLoggedOutUser, (req, res) => {
                 console.log("error in register: ", err);
                 res.render("register", {
                     layout: "main",
-                    error: "This email is already registered. Please try again!"
+                    error:
+                        "This email is already registered . Please try again or Login!"
                 });
             });
     });
@@ -356,10 +357,7 @@ app.post("/profile/edit", (req, res) => {
             })
             .catch(err => {
                 console.log("err :", err);
-                res.render("edit", {
-                    layout: "main",
-                    ageError: "Please try again!"
-                });
+
                 // res.redirect("/profile/edit");
             });
     }

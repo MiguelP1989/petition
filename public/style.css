@@ -8,7 +8,7 @@
 body {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: 90px 1fr 20px;
+    grid-template-rows: 70px 1fr 30px;
     background-size: cover;
     /* background-position: center; */
     height: 100%;
@@ -17,7 +17,7 @@ body {
 .box {
     display: flex;
     justify-content: center;
-    border: 2px solid red;
+    border: 4px solid orange;
     justify-content: space-around;
 }
 
@@ -26,8 +26,10 @@ form {
     flex-direction: column;
     border: 2px black solid;
     width: 400px;
-    height: 700px;
+    height: 500px;
     justify-content: center;
+    /* opacity: 0.9;
+    background-color: #ffffff; */
 }
 
 input,
@@ -40,75 +42,96 @@ button {
     border: 1px solid black;
 }
 
-.welcome {
+button {
+    background-color: orange;
+    border-radius: 10px;
+}
+
+.welcome,
+.firstbox {
     display: flex;
     border: 2px solid black;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.firstboxthanks {
+    height: 410px;
 }
 
-h1 {
+.petitionform {
+    display: flex;
+    border: 2px solid black;
+    justify-content: center;
+    flex-direction: column;
+}
+.signers {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    margin: 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.city,
+.url {
+    color: grey;
+}
+
+h1,
+h3 {
     margin: 30px;
     color: white;
 }
 
-.welcome {
-    /* background: url("https://image.freepik.com/free-photo/man-jumping-impossible-possible-cliff-sunset-background-business-concept-idea_1323-265.jpg");
-    background-size: contain; */
+p {
+    margin-top: 10px;
+    color: white;
 }
 
 #canvas {
-    border: 2px solid black;
+    border: 2px solid white;
+    margin-left: 17px;
+    margin-bottom: 20px;
+    background-color: grey;
 }
 
-/* .box {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.hiddenmessage {
-    display: flex;
-    justify-content: center;
-} */
-/* /////////    SIGNED PAGE  /////// */
-/* .signed {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.thankyou {
-    display: flex;
-    justify-content: center;
-}
-
-.image {
-    display: flex;
-    justify-content: center;
-}
 img {
-    height: 100px;
-    width: 250px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    border: 2px solid black;
+    border: 2px solid white;
+    background-color: grey;
 }
-.signers {
+
+.yogapic {
+    object-fit: cover;
+    height: 70%;
+}
+.returnbutton {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+.return {
     margin-top: 30px;
-} */
-button {
-    /* adding: 0.5rem 2.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    background: #111;
-    border-radius: 2.1875rem; */
+}
+
+.signers {
+    margin: 20px;
+}
+
+.passerror,
+.registererror {
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.yogabenefites {
+    color: white;
+}
+
+li {
+    margin: 8px;
 }

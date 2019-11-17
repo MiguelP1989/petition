@@ -1,17 +1,17 @@
-
-
-<form action="/profile" method="POST">
-    <h1> Now tell us a bit more about you</h1>
-{{#if ageError}}
+<div class="box">
+    <div>
+        <h1> Now tell us a bit more about you</h1>
+    </div>
+    <div class="petitionform">
+        <form action="/profile" method="POST">
+            <!-- {{#if ageError}}
 <p>{{ageError}}</p>
-{{/if}}
-<input type="number" name="age" placeholder="Age">
-<input type="text" name="city" placeholder="City">
-<input type="text" name="url" placeholder="homepage">
-<input type="hidden" name="_csrf" value="{{csrfToken}}">
-
-<div class ="button">
-    <button type="submit">Continue
-    </button>
+{{/if}} -->
+            <input type="number" name="age" placeholder="Age">
+            <input type="text" name="city" placeholder="City">
+            <input type="text" name="url" placeholder="homepage">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <button type="submit">Continue</button>
+        </form>
+    </div>
 </div>
-</form>

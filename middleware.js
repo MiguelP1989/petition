@@ -15,7 +15,7 @@ exports.requireLoggedOutUser = function(req, res, next) {
 };
 
 exports.requireNoSignature = function(req, res, next) {
-    if (req.session.user.signid) {
+    if (req.session.signid) {
         res.redirect("/signed");
     } else {
         next();
