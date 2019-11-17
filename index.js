@@ -391,35 +391,6 @@ app.post("/signed/delete", (req, res) => {
 
 app.listen(process.env.PORT || 8080, () => console.log("listening"));
 
-// prevent people that are log in and wanna login and register again
-// app.use((req, res, next) => {
-//     if (!req.session.userId && req.url != "/register" && req.url != "/login") {
-//         return res.redirect("/register");
-//     } else {
-//         next();
-//     }
-// });
-//
-// // app.get("/register", (req, res, next) => {
-// function requireLoggedOutUser (req, res, next) {
-//     if (req.session.userId) {
-//         res.redirect("/petition");
-//     } else {
-//         next();
-//     }
-// }
-//
-// app.get('/register', requireLoggedOutUser, (req, res) => {
-//
-// })
-// function requireNosignature(req, res, next) {
-//     if(req.session.userId) {
-//         res.redirect("")
-//     } else {
-//             next()
-//         }
-//     }
-// }
 //
 //const app = require("./index")
 // const {} = require
