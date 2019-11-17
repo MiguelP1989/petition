@@ -140,6 +140,10 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
+app.get("/", requireLoggedOutUser, (req, res) => {
+    res.redirect("/register");
+});
+
 app.get("/register", requireLoggedOutUser, (req, res) => {
     res.render("register", {
         layout: "main"
