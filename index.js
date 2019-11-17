@@ -8,7 +8,7 @@ const db = require("./utils/db");
 const { hash, compare } = require("./utils/bc");
 const csurf = require("csurf");
 const {
-    requireLoggedOutUser,
+    // requireLoggedOutUser,
     requireNoSignature,
     requireSignature,
     requireLoggedInUser
@@ -145,13 +145,13 @@ app.get("/", (req, res) => {
     res.redirect("/register");
 });
 
-app.get("/register", requireLoggedOutUser, (req, res) => {
+app.get("/register", (req, res) => {
     res.render("register", {
         layout: "main"
     });
 });
 
-app.post("/register", requireLoggedOutUser, (req, res) => {
+app.post("/register", (req, res) => {
     console.log("req.body: ", req.body);
     let first = req.body.first;
     let last = req.body.last;
