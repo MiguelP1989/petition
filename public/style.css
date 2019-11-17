@@ -83,7 +83,7 @@ a {
 
 h1,
 h3 {
-    margin: 30px;
+    margin: 10px;
     color: white;
 }
 
@@ -135,6 +135,7 @@ img {
 
 .yogabenefites {
     color: white;
+    margin: 20px;
 }
 
 li {
@@ -151,4 +152,8 @@ li {
 }
 .namaste {
     border: 2px solid black;
+}
+
+.frase {
+    margin-top: 40px;
 }

@@ -347,6 +347,7 @@ app.post("/profile/edit", (req, res) => {
             })
             .catch(err => {
                 console.log("err :", err);
+                res.redirect("/edit");
             });
     } else {
         Promise.all([
@@ -358,10 +359,10 @@ app.post("/profile/edit", (req, res) => {
                 let updateProfileUsers = results[0].rows;
                 let infoUpdate = [...updateUsers, ...updateProfileUsers];
                 console.log("infoUpdate :", infoUpdate);
-                res.redirect("/signed");
             })
             .catch(err => {
                 console.log("err :", err);
+                res.redirect("/profile/edit");
 
                 // res.redirect("/profile/edit");
             });
