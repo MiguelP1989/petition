@@ -74,6 +74,7 @@ app.post("/petition", requireLoggedInUser, requireNoSignature, (req, res) => {
             res.redirect("/signed");
         })
         .catch(err => {
+            res.redirect("/petition");
             console.log("failed", err);
         });
 });

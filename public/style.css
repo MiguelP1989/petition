@@ -8,7 +8,7 @@
 body {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: 70px 1fr 30px;
+    grid-template-rows: 70px 1fr 60px;
     background-size: cover;
     /* background-position: center; */
     height: 100%;
@@ -107,6 +107,11 @@ img {
 .yogapic {
     object-fit: cover;
     height: 70%;
+    border: 2px black solid;
+}
+
+.yogapic1 {
+    border: 2px black solid;
 }
 .returnbutton {
     display: flex;
@@ -134,4 +139,16 @@ img {
 
 li {
     margin: 8px;
+}
+
+.editpic {
+    border: 2px black solid;
+}
+
+.hands {
+    text-align: center;
+    margin-top: 20px;
+}
+.namaste {
+    border: 2px solid black;
 }
