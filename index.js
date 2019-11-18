@@ -304,7 +304,9 @@ app.post("/profile/edit", (req, res) => {
     let city = req.body.city;
     let url = req.body.url;
     let password = req.body.password;
-
+    if (age == "") {
+        age = null;
+    }
     // console.log("userId :", userId)
 
     Promise.all([
