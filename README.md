@@ -4,7 +4,7 @@ online: https://yogasessions.herokuapp.com/
 
 # overview
 
-An online petition where users can register, log in, add additional info(optional), update profile information, sign, redo their signature, view a list of users that have signed and see how many supporters sign by location.
+An online petition where users can register, log in, add additional info(optional), update profile information, sign, redo their signature, view a list of users that have signed and see how many have signed by location.
 The most enjoyable part was understanding the data flow.
 
 # tech 
