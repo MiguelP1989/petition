@@ -89,7 +89,8 @@ module.exports.getProfile = function getProfile(userId) {
         `SELECT first, last, city, age, url, email
         FROM users
         JOIN user_profiles
-        ON users.id = user_profiles.user_id WHERE users.id=$1`,
+        ON users.id = user_profiles.user_id
+        WHERE users.id=$1`,
         [userId]
     );
 };

@@ -197,13 +197,9 @@ app.post("/login", (req, res) => {
 
     db.getUserInfo(email)
         .then(results => {
-            console.log("resuuuuuuuuuuuuuults : ", results);
             let hashPass = results.rows[0].password;
             let userId = results.rows[0].id;
             let signatureId = results.rows[0].signid;
-            console.log("signatureIddddddddd  ", signatureId);
-            console.log("hashPass: ", hashPass);
-            // console.log("userId: ", userId);
             compare(pass, hashPass)
                 .then(match => {
                     console.log("maaaatch ", match);
@@ -213,8 +209,6 @@ app.post("/login", (req, res) => {
                             id: userId,
                             signid: signatureId
                         };
-                        // req.session.user.id = userId;
-                        // req.session.user.signatureid = signatureId;
 
                         console.log("signatureIddddddddd  ", signatureId);
 
@@ -232,7 +226,6 @@ app.post("/login", (req, res) => {
                 })
                 .catch(err => {
                     console.log("err ", err);
-                    // res.redirect("/register");
                 });
         })
         .catch(err => {
@@ -271,10 +264,8 @@ app.post("/profile", (req, res) => {
 ///////////////////    PROFILE EDIT      /////////////
 
 app.get("/profile/edit", (req, res) => {
-    // console.log("req.session: ", req.session);
     let userId = req.session.user.id;
     db.getProfile(userId).then(results => {
-        // console.log("results..: ", results);
         let first = results.rows[0].first;
         let last = results.rows[0].last;
         let city = results.rows[0].city;
@@ -307,7 +298,6 @@ app.post("/profile/edit", (req, res) => {
     if (age == "") {
         age = null;
     }
-    // console.log("userId :", userId)
 
     Promise.all([
         db.updateUsers(first, last, email, userId),
@@ -365,8 +355,6 @@ app.post("/profile/edit", (req, res) => {
             .catch(err => {
                 console.log("err :", err);
                 res.redirect("/profile/edit");
-
-                // res.redirect("/profile/edit");
             });
     }
 });
@@ -393,25 +381,6 @@ app.post("/signed/delete", (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080, () => console.log("listening"));
-
-//
-//const app = require("./index")
-// const {} = require
-// require("./auth")
-//
-// const {requireLoggedOutUser, } = require("./middleware")
-
-// files with router
-// const exxpress =require ("express");
-// const router = express.Router();
-
-//
-
-//
-// // in the index file
-//
-// const profileRouter = require("./profile")
-// app.user(profileRouter);
 
 // git remote add heroku + url
 // git remote -v
