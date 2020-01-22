@@ -10,3 +10,13 @@ The most enjoyable part was understanding the data flow.
 # tech 
 
  Handlebars, Node.js/Express & PostgreSQL
+
+# images 
+
+![](public/images/register.png)
+
+![](public/images/signup.png)
+
+![](public/images/thankyou.png)
+
+![](public/images/editprofile.png)
